@@ -25,25 +25,25 @@ import joblib
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        income = request.form.get("income")
-        age = request.form.get("age")
-        loan = request.form.get("loan")
-        income = float(income)
-        age = float(age)
-        loan = float(loan)
-        print(income, age, loan)
+        INCOME = request.form.get("INCOME")
+        AGE = request.form.get("AGE")
+        LOAN = request.form.get("LOAN")
+        INCOME = float(INCOME)
+        AGE = float(AGE)
+        LOAN = float(LOAN)
+        print(INCOME, AGE, LOAN)
         model1 = joblib.load("CART")
-        pred1 = model1.predict([[income, age, loan]])
+        pred1 = model1.predict([[INCOME, AGE, LOAN]])
         model2 = joblib.load("RF")
-        pred2 = model2.predict([[income, age, loan]])
+        pred2 = model2.predict([[INCOME, AGE, LOAN]])
         model3 = joblib.load("GB")
-        pred3 = model3.predict([[income, age, loan]])
+        pred3 = model3.predict([[INCOME, AGE, LOAN]])
         model4 = joblib.load("LM")
-        pred4 = model4.predict([[income, age, loan]])
+        pred4 = model4.predict([[INCOME, AGE, LOAN]])
         
         return(render_template("index.html", result1=pred1, result2=pred2, result3=pred3, result4=pred4))
     else:
-        return(render_template("index.html", result1="try again", result2="try again", result3="try again", result4="try again"))
+        return(render_template("index.html", result1="NA", result2="NA", result3="NA", result4="NA"))
 
 
 # In[5]:
